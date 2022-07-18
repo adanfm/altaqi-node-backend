@@ -1,10 +1,20 @@
 {
-  "name": "teste-alta",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "devDependencies": {},
-  "dependencies": {
-    "express": "^4.18.1"
-  }
+    "name": "teste-alta",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon ./src/index.js",
+        "initial-script": "nodemon ./src/commands/InitialScriptData.js"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.19",
+        "sucrase": "^3.24.0"
+    },
+    "dependencies": {
+        "axios": "^0.27.2",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "mongoose": "^6.4.4"
+    }
 }
