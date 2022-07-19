@@ -17,7 +17,7 @@ class App {
             useUnifiedTopology: true,
         });
 
-        // InitialScriptData();
+        InitialScriptData();
     }
 
     middlewares() {

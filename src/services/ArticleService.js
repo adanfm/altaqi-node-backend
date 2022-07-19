@@ -16,10 +16,6 @@ class ArticleService {
                 page: page,
                 limit: perPage,
                 customLabels: myCustomLabels,
-                select: {
-                    id: 0,
-                    __v: 0,
-                },
             };
 
             const data = await Article.paginate({}, options);
@@ -60,7 +56,6 @@ class ArticleService {
                 data: { message: "Erro ao buscar o artigo" },
             };
         }
-        return;
     }
 
     async delete(id) {
@@ -78,10 +73,7 @@ class ArticleService {
     async update(id, article) {
         try {
             await Article.findOneAndUpdate({ _id: id }, article);
-            const data = await Article.findOne({ _id: id }).select({
-                id: 0,
-                __v: 0,
-            });
+            const data = await Article.findOne({ _id: id });
 
             return { statusCode: 200, data };
         } catch (error) {

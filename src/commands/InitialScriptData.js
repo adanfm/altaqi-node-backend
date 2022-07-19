@@ -1,4 +1,5 @@
 import axios from "axios";
+import Article from "../models/Article";
 
 import ArticleService from "../services/ArticleService";
 const InitialScriptData = async () => {
@@ -9,25 +10,18 @@ const InitialScriptData = async () => {
     });
 
     try {
-        const articleService = new ArticleService();
+        const articles = await Article.find();
+        if (articles.length === 0) {
+            const articleService = new ArticleService();
 
-        const { data: dataResponse } = await api.get(`/articles?_limit=-1`);
-        await dataResponse.map(async (data) => {
-            let lauche = [];
-            data.launches.map((e) => {
-                lauche.push(e);
+            const { data: dataResponse } = await api.get(`/articles?_limit=-1`);
+            await dataResponse.map(async (data) => {
+                await articleService.create(data);
+                console.log(`Insert ${data.id}`);
             });
 
-            let event = [];
-            data.events.map((e) => {
-                event.push(e);
-            });
-
-            await articleService.create(data, lauche, event);
-            console.log(`Insert ${data.id}`);
-        });
-
-        return;
+            return;
+        }
     } catch (err) {
         console.error(err);
     }
