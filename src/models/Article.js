@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 
 const articleSchema = new Schema({
     id: Number,
@@ -13,5 +14,7 @@ const articleSchema = new Schema({
     lauches: Array,
     events: Array,
 });
+
+articleSchema.plugin(paginate);
 
 export default model("Article", articleSchema);

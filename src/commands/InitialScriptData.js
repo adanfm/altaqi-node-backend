@@ -1,7 +1,6 @@
 import axios from "axios";
-import App from "../App";
-import Article from "../models/Article";
 
+import ArticleService from "../services/ArticleService";
 const InitialScriptData = async () => {
     const apiUrl = process.env.BASEAPI_URL_SPACEFLIGHT;
 
@@ -9,27 +8,24 @@ const InitialScriptData = async () => {
         baseURL: apiUrl,
     });
 
-    const limitRequest = 200;
     try {
-        //const { data } = await api.get(`/articles?_limit=${limitRequest}`);
-        let lauche = [];
-        let event = [];
+        const articleService = new ArticleService();
 
-        let newArticle = new Article();
+        const { data: dataResponse } = await api.get(`/articles?_limit=-1`);
+        await dataResponse.map(async (data) => {
+            let lauche = [];
+            data.launches.map((e) => {
+                lauche.push(e);
+            });
 
-        newArticle.id = 999999;
-        newArticle.title = "Teste";
-        newArticle.url = "http://www.google.com";
-        newArticle.imageUrl = "http://www.google.com";
-        newArticle.newsSite = "http://www.google.com";
-        newArticle.summary = "Summary";
-        newArticle.publishedAt = new Date();
-        newArticle.updatedAt = new Date();
-        newArticle.featured = false;
-        newArticle.lauches = lauche;
-        newArticle.events = event;
+            let event = [];
+            data.events.map((e) => {
+                event.push(e);
+            });
 
-        await newArticle.save();
+            await articleService.create(data, lauche, event);
+            console.log(`Insert ${data.id}`);
+        });
 
         return;
     } catch (err) {
@@ -38,6 +34,3 @@ const InitialScriptData = async () => {
 };
 
 export default InitialScriptData;
-async () => {
-    InitialScriptData();
-};
