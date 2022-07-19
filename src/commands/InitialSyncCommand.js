@@ -30,12 +30,13 @@ const InitialSyncCommand = async () => {
                     console.log(
                         `Inserindo o artigo ${data.id} : ${data.title}`
                     );
-                    articleService.create(data);
+                    await articleService.create(data);
                 });
 
                 i += limit;
             }
             console.log("Finalizado");
+            return;
         }
     } catch (err) {
         console.error(err);

@@ -15,6 +15,7 @@ const articleSchema = new Schema({
     events: Array,
 });
 
+articleSchema.index({ title: "text" });
 articleSchema.plugin(paginate);
 
 export default model("Article", articleSchema);

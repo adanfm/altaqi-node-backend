@@ -12,7 +12,6 @@ const SyncApiCommand = async () => {
             baseURL: apiUrl,
         });
 
-        let articlesInsert = [];
         let i = 0;
         const limit = 500;
         const { data: countTotal } = await api.get("/articles/count");
@@ -33,13 +32,15 @@ const SyncApiCommand = async () => {
                         `Inserindo artigo na base de dados ${data.id} : ${data.title}`
                     );
 
-                    articleService.create(data);
+                    await articleService.create(data);
                 }
             });
 
             i += limit;
         }
         console.log("Finalizado");
+
+        return;
     } catch (err) {
         console.error(err);
     }
