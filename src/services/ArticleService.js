@@ -49,6 +49,13 @@ class ArticleService {
                 id: 0,
                 __v: 0,
             });
+
+            if (data === null) {
+                return {
+                    statusCode: 404,
+                    data: { message: "Artigo não encontrado" },
+                };
+            }
             return { statusCode: 200, data };
         } catch (error) {
             return {
