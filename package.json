@@ -4,8 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "dev": "nodemon ./src/index.js",
-        "initial-script": "nodemon ./src/commands/InitialScriptData.js"
+        "start": "nodemon ./src/index.js"
     },
     "devDependencies": {
         "nodemon": "^2.0.19",
@@ -14,9 +13,12 @@
     "dependencies": {
         "axios": "^0.27.2",
         "body-parser": "^1.20.0",
+        "cron": "^2.1.0",
         "dotenv": "^16.0.1",
         "express": "^4.18.1",
         "mongoose": "^6.4.4",
-        "mongoose-paginate-v2": "^1.7.0"
+        "mongoose-paginate-v2": "^1.7.0",
+        "node-cron": "^3.0.1",
+        "uuid": "^8.3.2"
     }
 }

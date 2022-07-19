@@ -1,9 +1,7 @@
 FROM node:14.15.4-slim
 
-USER node
+COPY . /app
 
-COPY . /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
-
-CMD ["sh","-c", "yarn install && yarn start"]
+CMD ["sh","-c", "npm install && npm run start"]

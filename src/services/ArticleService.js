@@ -85,6 +85,10 @@ class ArticleService {
             };
         }
     }
+
+    async findByTitle(title) {
+        return await Article.findOne({ title: title });
+    }
 }
 
 export default ArticleService;
