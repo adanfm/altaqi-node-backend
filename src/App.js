@@ -40,7 +40,7 @@ class App {
             # │ │ │ │ │ │
             # * * * * * *
         */
-        cron.schedule("0 25 10 * * *", SyncApiCommand);
+        cron.schedule("0 0 9 * * *", SyncApiCommand);
     }
 }
 
